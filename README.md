@@ -56,7 +56,7 @@ optional arguments:
                         password list
   -d, --decode          decode encryption.data content
   -s, --silent          display only basic info while cracking, no progress count
-  -v, --version         show program's version number and exit
+  -v, --version         show program\'s version number and exit
 
 
 $ pyvmx-cracker -x sample.vmx -w wordlist.txt -d
