@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+exclude = ["debian*", "binaries*", "build*", "dist*"]
+
+[project]
+name = "pyvmx-cracker"
+version = "1.0.0"
+dependencies = [
+    "PyCrypto",
+]
+requires-python = ">=3.6"
+authors = [
+  {name = "Alexandre Cheron / Corey Forman (digitalsleuth)", email = "github@digitalsleuth.ca"}
+]
+maintainers = [
+  {name = "Corey Forman (digitalsleuth)", email = "github@digitalsleuth.ca"}
+]
+description = "Python 3 tool to decrypt the password and data from password-protected VM's"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["digital forensics", "dfir", "vm", "virtual machine", "encrypted", "pyvmx"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/digitalsleuth/pyvmx-cracker"
+
+[project.scripts]
+pyvmx-cracker = "pyvmx_cracker.pyvmx_cracker:main"

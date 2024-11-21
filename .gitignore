@@ -1,2 +1,5 @@
 .vscode
 sample.vmx
+build/
+dist*
+*.egg-info/

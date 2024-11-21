@@ -28,40 +28,39 @@ The KeyStore is a simple structure, and it contains the information needed by th
 | salt | The salt parameter is used with the password for the PBKDF2-HMAC-SHA-1 | 
 | config_hash | Only HMAC-SHA-1 hash algorithm for the configuration is supported | 
 | dict | Dictionary (starts with 'type=key:cipher=AES-256:key=' when successfully decrypted) | 
-
+| iv | The IV determined from the decryption process |
+| key  | The key from 'dict' once decrypted |
+| password | The password identified from a successful decryption |
 
 ## Requirements
 
-This tool requires the [pyCrypto](https://www.dlitz.net/software/pycrypto/) module. You can install it from the requirements file :
+This tool requires, and installs with, the [pyCrypto](https://www.dlitz.net/software/pycrypto/) module.
 
-```bash
-$ pip3 install -r requirements.txt
-```
-
-You also can install it directly :
-
-```bash
-$ pip3 pip install pyCrypto
-```
 
 ## Install
 
-Checkout the source: `git clone https://github.com/axcheron/pyvmx-cracker.git`
+Checkout the source: `git clone https://github.com/digitalsleuth/pyvmx-cracker.git`
 
 ## Getting Started
 
 ```bash
-$ python3 pyvmx-cracker.py
-usage: pyvmx-cracker.py [-h] [-v VMX] [-d DICT]
+$ pyvmx-cracker
+usage: pyvmx-cracker [-h] -x VMX -w WORDLIST [-d] [-s] [-v]
 
-Simple tool to crack VMware VMX encryption passwords
+Simple tool to crack VMware VMX encryption passwords - v1.0
 
 optional arguments:
   -h, --help            show this help message and exit
-  -v VMX, --vmx VMX     .vmx file
-  -d DICT, --dict DICT  password list
+  -x VMX, --vmx VMX     .vmx file
+  -w WORDLIST, --wordlist WORDLIST
+                        password list
+  -d, --decode          decode encryption.data content
+  -s, --silent          display only basic info while cracking, no progress count
+  -v, --version         show program's version number and exit
 
-$ python3 pyvmx-cracker.py -v sample.vmx -d wordlist.txt
+
+$ pyvmx-cracker -x sample.vmx -w wordlist.txt -d
+
 Starting pyvmx-cracker...
 
 [*] KeySafe information...
@@ -70,20 +69,36 @@ Starting pyvmx-cracker...
         Algorithm = AES-256
         Config Hash = HMAC-SHA-1
         Salt = f64c6bfb17aaa38c4fcfdb6d3d951514
+        Rounds = 10000
+        IV = ce7d6470b128998a4a019632ac55438b
 
 [*] Starting bruteforce...
-        9 password tested...
-        20 password tested...
-        40 password tested...
-        111 password tested...
-        128 password tested...
-        136 password tested...
-        140 password tested...
-        154 password tested...
-        180 password tested...
-        209 password tested...
+        20 passwords tested...
+        40 passwords tested...
+        60 passwords tested...
+        80 passwords tested...
+        100 passwords tested...
+        120 passwords tested...
+        140 passwords tested...
+        160 passwords tested...
+        180 passwords tested...
+        200 passwords tested...
+
+[*] 211 passwords tested
 
 [*] Password Found = Password123
+
+[*] Decrypted data:
+config.version = "8"
+virtualHW.version = "19"
+mks.enable3d = "TRUE"
+pciBridge0.present = "TRUE"
+pciBridge4.present = "TRUE"
+pciBridge4.virtualDev = "pcieRootPort"
+pciBridge4.functions = "8"
+pciBridge5.present = "TRUE"
+pciBridge5.virtualDev = "pcieRootPort"
+---snip---
 ```
 
 ## Resources
